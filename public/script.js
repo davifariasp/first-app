@@ -28,12 +28,6 @@ function verificaUpdate(data){
 }
 
 function verificaForm(data){
-    /*
-o parâmetro frm desta função significa: this.form,
-pois a chamada da função - validaForm(this) foi
-definida na tag form.
-*/  
-    //validação de nome
     if (data._name.value == "") {
         alert("Nenhum nome foi digitado, verifique o campo Nome e tente novamente.");
         data._name.focus();
@@ -92,30 +86,8 @@ definida na tag form.
         data._height.focus();
         return false;
     }
-    
 
-//Verifica se o campo nome foi preenchido e
-    //contém no mínimo três caracteres.
-    // if(frm.nome.value == "`" || frm.nome.value == null || frm.nome.value.lenght < 3) {
-    //     //É mostrado um alerta, caso o campo esteja vazio.
-    //     alert("Por favor, indique o seu nome.");
-    //     //Foi definido um focus no campo.
-    //     frm.nome.focus();
-    //     //o form não é enviado.
-    //     return false;
-    // }
-    //o campo e-mail precisa de conter: "@", "." e não pode estar vazio
-    // if(frm.email.value.indexOf("@") == -1 ||
-    //   frm.email.valueOf.indexOf(".") == -1 ||
-    //   frm.email.value == "" ||
-    //   frm.email.value == null) {
-    //     alert("Por favor, indique um e-mail válido.");
-    //     frm.email.focus();
-    //     return false;
-    // }
-    alert(data);
     return true;
-
 }
 
 
@@ -372,6 +344,7 @@ function add(form,link){
         http.onload = ()=>{        
             if (http.readyState === 4 && http.status === 200) {
                 alert("Ei man, deu bom ó"); 
+                clearCadastro(form);
             } else {
                 console.log(`Erro durante a tentativa de adicionar novo usuário! Código do Erro: ${http.status}`); 
             }
@@ -393,6 +366,19 @@ function popularTabela(table, content){
     return table;
 }
 
+function clearCadastro(){
+    let inputs = document.getElementsByClassName('form-control');
+
+    for(i=0 ; i<inputs.length ;i++){
+        console.log(inputs[i])
+        if(inputs[i].type=="checkbox"){
+            if(inputs[i].checked==true) inputs[i].checked=false;
+        } else {
+            inputs[i].value="";
+            console.log('Campo '+i+' apagado com sucesso!');
+        }
+    }
+}
 
 function list(link){
     const http = new XMLHttpRequest(); //cria um objeto para requisição ao servidor
@@ -432,41 +418,9 @@ function list(link){
             let lista = JSON.parse(http.response)
             popularTabela(document.getElementById('list-users'), lista);
         } else {
-            console.log(`Erro durante a tentativa de remoção do usuário: ${_name}! Código do Erro: ${http.status}`); 
+            console.log(`Erro durante a tentativa de exibição de usuários: ${_name}! Código do Erro: ${http.status}`); 
         }
     }   
-
-    /*console.log("clicou"); 
-    let tableList = document.getElementById("listausuarios");
-
-    if(tableList.className==="show"){
-        tableList.className="hidden";
-    } else {
-        tableList.className="show";
-    }*/
-    
-
-    //Primeira parte: envia mensagem para o servidor pedindo uma listagem dos usuários
-    /*let lista = JSON.parse(http.response)
-
-    //Segunda parte: apos recebimento da lista de usuarios, no formato JSON, colocar os usuarios na interface
-   
-
-    let tr = document.createElement("tr");
-    let td = document.createElement("td");
-    let span = document.createElement("span");
-    let cont;
-
-    for(let cont=0;cont<lista.length;cont++){ 
-        td.setAttribute(`data-index-row=${cont}`);
-        span.innerHTML =  Object.keys(datas[cont])[0] //keys 0 - name, 1 - email
-        span.className="show";
-        td.appendChild(span);
-        tr.appendChild(td);
-        
-        tableList.appendChild(tr);
-    }
-*/
 }
 
 
