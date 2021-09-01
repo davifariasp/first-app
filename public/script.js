@@ -324,9 +324,9 @@ function add(form,link){
     
         http.send(dataToSend);//envia dados para o servidor na forma de JSON
     
-        /* este codigo abaixo foi colocado para que a interface de cadastro so seja modificada quando se receber um aviso do servidor que a modificacao foi feita com sucesso. No caso o aviso vem na forma do codigo 200 de HTTP: OK */
+        /* este codigo abaixo foi colocado para que a interface de cadastro so seja modificada quando se receber um aviso do servidor que a modificacao foi feita com sucesso. No caso o aviso vem na forma do codigo 200 de HTTP: OK
     
-        /*
+        
         readyState:
         0: request not initialized
         1: server connection established
@@ -387,9 +387,8 @@ function list(link){
     http.open('GET',link,true); //abre uma comunicação com o servidor através de uma requisição POST
     http.setRequestHeader('Content-Type','application/json'); //constroi um cabecalho http para envio dos dados
     http.send(null);//envia dados para o servidor na forma de JSON
-    /* este codigo abaixo foi colocado para que a interface de cadastro so seja modificada quando se receber um aviso do servidor que a modificacao foi feita com sucesso. No caso o aviso vem na forma do codigo 200 de HTTP: OK */
-
-    /*
+    /* este codigo abaixo foi colocado para que a interface de cadastro so seja modificada quando se receber um aviso do servidor que a modificacao foi feita com sucesso. No caso o aviso vem na forma do codigo 200 de HTTP: OK 
+    
     readyState:
     0: request not initialized
     1: server connection established
